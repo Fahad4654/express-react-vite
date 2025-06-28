@@ -8,24 +8,30 @@ import {
   TextField, 
   Button, 
   Paper,
-  Alert
+  Alert,
+  CircularProgress
 } from '@mui/material';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
+    setIsLoading(true);
+    
     try {
       await login(email, password);
       navigate('/dashboard');
     } catch (err) {
-      setError('Failed to login');
-      console.error(err);
+      setError(err instanceof Error ? err.message : 'Login failed');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -36,7 +42,11 @@ export default function Login() {
           <Typography variant="h4" component="h1" gutterBottom>
             Login
           </Typography>
-          {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+          {error && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {error}
+            </Alert>
+          )}
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -64,8 +74,13 @@ export default function Login() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={isLoading}
             >
-              Sign In
+              {isLoading ? (
+                <CircularProgress size={24} color="inherit" />
+              ) : (
+                'Sign In'
+              )}
             </Button>
           </Box>
         </Paper>
