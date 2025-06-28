@@ -1,4 +1,4 @@
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 interface DecodedToken {
   id?: string;
@@ -11,7 +11,7 @@ export const decodeToken = (token: string): DecodedToken => {
   try {
     return jwtDecode<DecodedToken>(token);
   } catch (error) {
-    console.error('Error decoding token:', error);
+    console.error("Error decoding token:", error);
     return {};
   }
 };
@@ -29,8 +29,8 @@ export const isTokenValid = (token: string): boolean => {
 export const getTokenUserInfo = (token: string) => {
   const decoded = decodeToken(token);
   return {
-    id: decoded.id || '',
-    email: decoded.email || '',
+    id: decoded.id || "",
+    email: decoded.email || "",
     // Map other claims to user properties
   };
 };

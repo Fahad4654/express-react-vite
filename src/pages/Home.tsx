@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
-import { Container, Typography, Button, Box } from '@mui/material';
+import { Link } from "react-router-dom";
+import { Container, Typography, Button, Box } from "@mui/material";
 
 export default function Home() {
   return (
     <Container maxWidth="md">
-      <Box sx={{ my: 4, textAlign: 'center' }}>
+      <Box sx={{ my: 4, textAlign: "center" }}>
         <Typography variant="h3" component="h1" gutterBottom>
           Welcome to our App
         </Typography>

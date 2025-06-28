@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { AppBar, Toolbar, Button, Typography, Box } from '@mui/material';
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { AppBar, Toolbar, Button, Typography, Box } from "@mui/material";
 
 export default function Navbar() {
   const { isAuthenticated, logout } = useAuth();
@@ -11,7 +11,7 @@ export default function Navbar() {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           My App
         </Typography>
-        <Box sx={{ display: 'flex', gap: 2 }}>
+        <Box sx={{ display: "flex", gap: 2 }}>
           <Button color="inherit" component={Link} to="/">
             Home
           </Button>

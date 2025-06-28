@@ -1,35 +1,35 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { 
-  Container, 
-  Box, 
-  Typography, 
-  TextField, 
-  Button, 
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import {
+  Container,
+  Box,
+  Typography,
+  TextField,
+  Button,
   Paper,
   Alert,
-  CircularProgress
-} from '@mui/material';
+  CircularProgress,
+} from "@mui/material";
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setIsLoading(true);
-    
+
     try {
       await login(email, password);
-      navigate('/dashboard');
+      navigate("/dashboard");
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Login failed');
+      setError(err instanceof Error ? err.message : "Login failed");
     } finally {
       setIsLoading(false);
     }
@@ -79,7 +79,7 @@ export default function Login() {
               {isLoading ? (
                 <CircularProgress size={24} color="inherit" />
               ) : (
-                'Sign In'
+                "Sign In"
               )}
             </Button>
           </Box>
